@@ -75,12 +75,33 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+
+  get(i) {
+    if (i < 0 || i >= this.length) return null;
+    let counter = 0;
+    let current = this.head;
+    while (counter !== i) {
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
+
+  set(i, val) {
+    const node = this.get(i);
+    if (node) {
+      node.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 let list = new SinglyLinkedList();
-// list.push('hello');
-// list.push('hi');
-// list.push('hojo');
+list.push('hello');
+list.push('hi');
+list.push('hojo');
 
-list.unshift(100);
+// list.unshift(100);
+list.set(3, 'bye');
 console.log(list);
