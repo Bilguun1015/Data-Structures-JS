@@ -127,21 +127,28 @@ class SinglyLinkedList {
   }
 
   reverse() {
-    [this.head, this.tail] = [this.tail, this.head];
-    let next;
-    let prev;
     let node = this.head;
-
-    while (this.tail.next) {}
+    [this.head, this.tail] = [this.tail, this.head];
+    let prev = null;
+    let next;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next; // hi number
+      node.next = prev; // hello.null hi.hello
+      prev = node; // hello hi
+      node = next; // hi number
+    }
+    return this;
   }
 }
 
 let list = new SinglyLinkedList();
 list.push('hello');
 list.push('hi');
+list.push('number');
 list.push('hojo');
 
 // list.unshift(100);
 // list.set(3, 'bye');
+console.log(list);
 list.reverse();
 console.log(list);
