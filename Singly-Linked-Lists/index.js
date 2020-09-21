@@ -99,7 +99,7 @@ class SinglyLinkedList {
   }
 
   insert(i, val) {
-    // insert a node in a give position
+    // inserts a node in a give position
     if (i < 0 || i > this.length) return false;
     if (i === this.length) return !!this.push(val);
     if (i === 0) return !!this.unshift(val);
@@ -112,6 +112,28 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+
+  remove(i) {
+    // removes a node with a given index
+    if (i < 0 || i >= this.length) return undefined;
+    if (i === this.length - 1) return this.pop();
+    if (i === 0) return this.shift();
+
+    let prevNode = this.get(i - 1);
+    let removed = prevNode.next;
+    prevNode.next = removed.next;
+    this.length--;
+    return removed;
+  }
+
+  reverse() {
+    [this.head, this.tail] = [this.tail, this.head];
+    let next;
+    let prev;
+    let node = this.head;
+
+    while (this.tail.next) {}
+  }
 }
 
 let list = new SinglyLinkedList();
@@ -121,5 +143,5 @@ list.push('hojo');
 
 // list.unshift(100);
 // list.set(3, 'bye');
-console.log(list.insert(0, 'Rae'));
+list.reverse();
 console.log(list);
