@@ -74,6 +74,7 @@ class DoublyLinkedList {
 
   get(i) {
     if (i < 0 || i >= this.length) return null;
+
     let counter, node;
     if (i <= this.length / 2) {
       counter = 0;
@@ -92,6 +93,16 @@ class DoublyLinkedList {
     }
     return node;
   }
+
+  set(i, val) {
+    let node = this.get(i);
+
+    if (node !== null) {
+      node.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 let list = new DoublyLinkedList();
@@ -99,16 +110,16 @@ let list = new DoublyLinkedList();
 list.push(100);
 list.push(99);
 list.push(98);
-list.push(97);
-list.push(96);
-list.push(95);
-list.push(94);
-list.push(93);
-list.push(92);
-list.push(91);
-console.log(list.get(8));
+// list.push(97);
+// list.push(96);
+// list.push(95);
+// list.push(94);
+// list.push(93);
+// list.push(92);
+// list.push(91);
+console.log(list.set(-1, 1000));
 // console.log(list.shift());
 // console.log(list.shift());
 // console.log(list.shift());
 // console.log(list.shift());
-// console.log(list);
+console.log(list);
