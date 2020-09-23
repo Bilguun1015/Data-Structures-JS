@@ -138,6 +138,22 @@ class DoublyLinkedList {
     this.length--;
     return removed;
   }
+
+  reverse() {
+    if (!this.head) return undefined;
+    let current = this.head;
+    [this.head, this.tail] = [this.tail, this.head];
+    let prev = null;
+    let next;
+    for (let i = 0; i < this.length; i++) {
+      next = current.next; // 10
+      current.next = prev; // null
+      current.prev = next;
+      prev = current;
+      current = next;
+    }
+    return this;
+  }
 }
 
 let list = new DoublyLinkedList();
@@ -145,16 +161,7 @@ let list = new DoublyLinkedList();
 list.push(100);
 list.push(99);
 list.push(98);
-// list.push(97);
-// list.push(96);
-// list.push(95);
-// list.push(94);
-// list.push(93);
-// list.push(92);
-// list.push(91);
-console.log(list.remove(3));
-// console.log(list.shift());
-// console.log(list.shift());
-// console.log(list.shift());
-// console.log(list.shift());
+
+list.reverse();
+
 console.log(list);
