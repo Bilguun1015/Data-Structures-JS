@@ -29,13 +29,10 @@ class Stack {
   pop() {
     if (!this.first) return null;
     let popped = this.first;
-    if (this.length === 1) {
-      this.first = null;
+    if (this.length === this.last) {
       this.last = null;
-    } else {
-      this.first = popped.next;
-      popped.next = null;
     }
+    this.first = this.first.next;
     this.length--;
     return popped.val;
   }
