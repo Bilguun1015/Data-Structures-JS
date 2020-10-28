@@ -13,16 +13,34 @@ class Queue {
     this.size = 0;
   }
   enqueue(val) {
-    let newItem = new Node(val);
-    if (this.first === null) {
-      this.first = newItem;
-      this.last = newItem;
+    let newNode = new Node(val);
+    if (!this.first) {
+      this.first = newNode;
+      this.last = newNode;
     } else {
-      this.last.next = newItem;
-      this.tail = newItem;
+      this.last.next = newNode;
+      this.last = newNode;
     }
-    this.size++;
+    return ++this.size;
   }
 
-  dequeue() {}
+  dequeue() {
+    if (!this.first) return null;
+    let removed = this.first;
+    if (this.first === this.last) {
+      this.last = null;
+    }
+    this.first = this.first.next;
+    removed.next = null;
+    this.size--;
+    return removed.val;
+  }
 }
+
+const q = new Queue();
+q.enqueue(1);
+q.enqueue(2);
+console.log(q);
+q.dequeue();
+console.log(q);
+q.dequeue();
