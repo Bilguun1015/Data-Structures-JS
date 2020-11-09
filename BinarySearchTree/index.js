@@ -82,15 +82,38 @@ class BinarySearchTree {
 
     return visited;
   }
+  //depth first search - postorder
+  dfsPostOrder() {
+    let visited = [],
+      current = this.root;
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      visited.push(node.value);
+    };
+    traverse(current);
+
+    return visited;
+  }
 }
 
 const tree = new BinarySearchTree();
 tree.insert(10);
 tree.insert(9);
 tree.insert(8);
-tree.insert(11);
+tree.insert(7);
+tree.insert(13);
+tree.insert(3);
+
 tree.insert(12);
+tree.insert(14);
+tree.insert(11);
 // console.log(tree);
 // console.log(tree.contains(11));
 // console.log(tree.bfs());
-console.log(tree.dfsPreOrder());
+console.log(tree.dfsPostOrder());
+//         10
+//     9         13
+//   8         12   14
+// 3   7      11
+//[3,7,8,9,11,12,14,13,10]
