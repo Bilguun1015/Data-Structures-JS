@@ -52,6 +52,21 @@ class BinarySearchTree {
     }
     return false;
   }
+
+  bfs() {
+    let visited = [],
+      queue = [],
+      node = this.root;
+
+    queue.push(node);
+    while (queue.length !== 0) {
+      node = queue.shift();
+      visited.push(node.value);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    return visited;
+  }
 }
 
 const tree = new BinarySearchTree();
@@ -61,4 +76,5 @@ tree.insert(8);
 tree.insert(11);
 tree.insert(12);
 // console.log(tree);
-console.log(tree.search(13));
+// console.log(tree.contains(11));
+console.log(tree.bfs());
