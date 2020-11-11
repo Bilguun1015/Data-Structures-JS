@@ -101,9 +101,9 @@ class BinarySearchTree {
       current = this.root;
 
     const traverse = (node) => {
-      if (node.left) traverse(node.left);
+      node.left && traverse(node.left);
       visited.push(node.value);
-      if (node.right) traverse(node.right);
+      node.right && traverse(node.right);
     };
     traverse(current);
 
@@ -130,5 +130,5 @@ console.log(tree.dfsInOrder());
 //     9         13
 //   8         12   14
 // 7      11
-// 3
+//3
 //[3,7,8,9,10,13,12,11,14]
