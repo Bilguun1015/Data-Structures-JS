@@ -20,10 +20,63 @@ class MaxBinaryHeap {
       idx = parentIdx;
     }
   }
+
+  extractMax() {
+    const max = this.values[0];
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      this.bubbleDown();
+    }
+    return max;
+  }
+
+  bubbleDown() {
+    let idx = 0;
+    const l = this.values.length;
+    const element = this.values[0];
+    while (true) {
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if (leftChildIdx < l) {
+        leftChild = this.values[leftChildIdx];
+        if (leftChild > element) {
+          swap = leftChildIdx;
+        }
+      }
+      if (rightChildIdx < l) {
+        rightChild = this.values[rightChildIdx];
+        if (
+          (swap === null && rightChild > element) ||
+          (swap !== null && rightChild > leftChild)
+        ) {
+          swap = rightChildIdx;
+        }
+      }
+
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
+    }
+  }
 }
 
 let heap = new MaxBinaryHeap();
-heap.insert(55);
-heap.insert(12);
-heap.insert(12);
+// heap.insert(55);
+console.log(heap.values);
+heap.extractMax();
+console.log(heap.values);
+heap.extractMax();
+console.log(heap.values);
+heap.extractMax();
+heap.extractMax();
+heap.extractMax();
+heap.extractMax();
+console.log(heap.values);
+console.log(heap.extractMax());
+heap.insert(44);
 console.log(heap.values);
