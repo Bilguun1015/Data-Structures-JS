@@ -1,11 +1,11 @@
 class Node {
   constructor(val, priority) {
-    this.priority = priority;
     this.val = val;
+    this.priority = priority;
   }
 }
 
-class MinBinaryHeap {
+class PriorityQueue {
   constructor() {
     this.values = [];
   }
@@ -13,20 +13,78 @@ class MinBinaryHeap {
   enqueue(val, priority) {
     const newNode = new Node(val, priority);
     this.values.push(newNode);
-    this.bubbleUp(newNode);
+    this.bubbleUp();
   }
 
-  bubbleUp(node) {
+  bubbleUp() {
     let idx = this.values.length - 1;
+    const element = this.values[idx];
     while (idx > 0) {
       let parentIdx = Math.floor((idx - 1) / 2);
       let parent = this.values[parentIdx];
-      if (node.priority >= parent) break;
-      this.values[parentIdx] = node;
+      if (element.priority >= parent.priority) break;
+      this.values[parentIdx] = element;
       this.values[idx] = parent;
       idx = parentIdx;
     }
   }
 
-  dequeue() {}
+  dequeue() {
+    const min = this.values[0];
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      this.bubbleDown();
+    }
+    return min;
+  }
+
+  bubbleDown() {
+    let idx = 0;
+    const l = this.values.length;
+    const element = this.values[0];
+    while (true) {
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if (leftChildIdx < l) {
+        leftChild = this.values[leftChildIdx];
+        if (leftChild.priority < element.priority) {
+          swap = leftChildIdx;
+        }
+      }
+      if (rightChildIdx < l) {
+        rightChild = this.values[rightChildIdx];
+        if (
+          (swap === null && rightChild.priority < element.priority) ||
+          (swap !== null && rightChild.priority < leftChild.priority)
+        ) {
+          swap = rightChildIdx;
+        }
+      }
+
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
+    }
+  }
 }
+
+let ER = new PriorityQueue();
+
+ER.enqueue('common cold', 5);
+ER.enqueue('flu cold', 5);
+ER.enqueue('gunshot wound', 1);
+ER.enqueue('HIGH fever', 4);
+ER.enqueue('broken arm', 2);
+ER.enqueue('glass in foot', 3);
+console.log(ER.values);
+ER.dequeue();
+ER.dequeue();
+ER.dequeue();
+ER.dequeue();
+ER.dequeue();
+console.log(ER.values);
