@@ -13,4 +13,33 @@ class HashTable {
     }
     return total;
   }
+
+  set(key, val) {
+    const index = this._hash(key);
+    console.log(index);
+    if (!this.keyMap[index]) {
+      this.keyMap[index] = [];
+    }
+    this.keyMap[index].push([key, val]);
+  }
+
+  get(key) {
+    const index = this._hash(key);
+    if (!this.keyMap[index]) return undefined;
+    for (let i = 0; i < this.keyMap[index].length; i++) {
+      if (this.keyMap[index][i][0] === key) {
+        return this.keyMap[index][i];
+      }
+    }
+  }
 }
+
+let ht = new HashTable();
+
+ht.set('yellow', 'goodbye');
+ht.set('orange', 'something');
+// ht.set('hello world', 'another');
+// ht.set('hello world', 'another');
+let val = ht.get('yellow');
+console.log(val);
+// console.log(ht.keyMap);
