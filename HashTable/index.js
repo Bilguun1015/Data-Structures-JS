@@ -28,9 +28,21 @@ class HashTable {
     if (!this.keyMap[index]) return undefined;
     for (let i = 0; i < this.keyMap[index].length; i++) {
       if (this.keyMap[index][i][0] === key) {
-        return this.keyMap[index][i];
+        return this.keyMap[index][i][1];
       }
     }
+  }
+
+  keys() {}
+
+  values() {
+    let valuesArr = [];
+    this.keyMap.forEach((each) => {
+      if (each) {
+        each.forEach((val) => valuesArr.push(val));
+      }
+    });
+    return valuesArr;
   }
 }
 
@@ -42,4 +54,5 @@ ht.set('orange', 'something');
 // ht.set('hello world', 'another');
 let val = ht.get('yellow');
 console.log(val);
-// console.log(ht.keyMap);
+console.log(ht.values());
+console.log(ht.keyMap);
