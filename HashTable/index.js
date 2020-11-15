@@ -33,7 +33,19 @@ class HashTable {
     }
   }
 
-  keys() {}
+  keys() {
+    let keysArr = [];
+    this.keyMap.forEach((each) => {
+      if (each) {
+        each.forEach((key) => {
+          if (!keysArr.includes(key[0])) {
+            keysArr.push(key[0]);
+          }
+        });
+      }
+    });
+    return keysArr;
+  }
 
   values() {
     let valuesArr = [];
@@ -57,5 +69,5 @@ ht.set('hello world', 'another');
 ht.set('hello world', 'another');
 let val = ht.get('yellow');
 console.log(val);
-console.log(ht.values());
+console.log(ht.keys());
 console.log(ht.keyMap);
