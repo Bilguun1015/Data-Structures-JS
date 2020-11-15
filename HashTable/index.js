@@ -39,7 +39,11 @@ class HashTable {
     let valuesArr = [];
     this.keyMap.forEach((each) => {
       if (each) {
-        each.forEach((val) => valuesArr.push(val));
+        each.forEach((val) => {
+          if (!valuesArr.includes(val[1])) {
+            valuesArr.push(val[1]);
+          }
+        });
       }
     });
     return valuesArr;
@@ -49,9 +53,8 @@ class HashTable {
 let ht = new HashTable();
 
 ht.set('yellow', 'goodbye');
-ht.set('orange', 'something');
-// ht.set('hello world', 'another');
-// ht.set('hello world', 'another');
+ht.set('hello world', 'another');
+ht.set('hello world', 'another');
 let val = ht.get('yellow');
 console.log(val);
 console.log(ht.values());
