@@ -24,16 +24,42 @@ class Graph {
 
     delete this.adjacencyList[v1];
   }
+
+  dfsRecursive(vertex) {
+    let result = [];
+    let visited = {};
+
+    let dfs = (v) => {
+      if (!this.adjacencyList[v].length) return;
+      visited[v] = true;
+      result.push(v);
+
+      this.adjacencyList[v].forEach((each) => {
+        if (!visited[each]) {
+          dfs(each);
+        }
+      });
+    };
+    dfs(vertex);
+
+    return result;
+  }
 }
 
 const g = new Graph();
-g.addVertex('Tokyo');
-g.addVertex('Mongolia');
-g.addVertex('Korea');
-g.addEdge('Tokyo', 'Mongolia');
-g.addEdge('Tokyo', 'Korea');
-console.log(g.adjacencyList);
-g.removeVertex('Tokyo');
-g.removeVertex('Mongolia');
-// g.removeEdge('Korea', 'Tokyo');
-console.log(g.adjacencyList);
+g.addVertex('A');
+g.addVertex('B');
+g.addVertex('C');
+g.addVertex('D');
+g.addVertex('E');
+g.addVertex('F');
+
+g.addEdge('A', 'B');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('C', 'E');
+g.addEdge('D', 'E');
+g.addEdge('D', 'F');
+g.addEdge('E', 'F');
+
+console.log(g.dfsRecursive('A'));
