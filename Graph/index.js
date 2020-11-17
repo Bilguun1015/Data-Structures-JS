@@ -44,6 +44,26 @@ class Graph {
 
     return result;
   }
+
+  dftIteritive(start) {
+    const result = [],
+      visited = {},
+      stack = [start];
+    let vertex;
+    visited[start] = true;
+
+    while (stack.length) {
+      vertex = stack.pop();
+      result.push(vertex);
+      this.adjacencyList[vertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          stack.push(neighbor);
+        }
+      });
+    }
+    return result;
+  }
 }
 
 const g = new Graph();
@@ -63,3 +83,4 @@ g.addEdge('D', 'F');
 g.addEdge('E', 'F');
 
 console.log(g.dftRecursive('A'));
+console.log(g.dftIteritive('A'));
