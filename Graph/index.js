@@ -25,22 +25,22 @@ class Graph {
     delete this.adjacencyList[v1];
   }
 
-  dfsRecursive(vertex) {
-    let result = [];
-    let visited = {};
+  dftRecursive(start) {
+    const result = [];
+    const visited = {};
+    const adjacencyList = this.adjacencyList;
 
-    let dfs = (v) => {
-      if (!this.adjacencyList[v].length) return;
+    (function dfs(v) {
+      if (!adjacencyList[v]) return null;
       visited[v] = true;
       result.push(v);
 
-      this.adjacencyList[v].forEach((each) => {
-        if (!visited[each]) {
-          dfs(each);
+      adjacencyList[v].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          return dfs(neighbor);
         }
       });
-    };
-    dfs(vertex);
+    })(start);
 
     return result;
   }
@@ -62,4 +62,4 @@ g.addEdge('D', 'E');
 g.addEdge('D', 'F');
 g.addEdge('E', 'F');
 
-console.log(g.dfsRecursive('A'));
+console.log(g.dftRecursive('A'));
