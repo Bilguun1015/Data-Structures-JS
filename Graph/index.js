@@ -64,6 +64,26 @@ class Graph {
     }
     return result;
   }
+
+  bft(start) {
+    const queue = [start],
+      result = [],
+      visited = {};
+    let vertex;
+    visited[start] = true;
+
+    while (queue.length) {
+      vertex = queue.shift();
+      result.push(vertex);
+      this.adjacencyList[vertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          queue.push(neighbor);
+        }
+      });
+    }
+    return result;
+  }
 }
 
 const g = new Graph();
@@ -73,7 +93,6 @@ g.addVertex('C');
 g.addVertex('D');
 g.addVertex('E');
 g.addVertex('F');
-
 g.addEdge('A', 'B');
 g.addEdge('A', 'C');
 g.addEdge('B', 'D');
@@ -84,3 +103,4 @@ g.addEdge('E', 'F');
 
 console.log(g.dftRecursive('A'));
 console.log(g.dftIteritive('A'));
+console.log(g.bft('A'));
