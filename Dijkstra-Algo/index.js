@@ -31,3 +31,13 @@ class PriorityQueue {
     this.values.sort((a, b) => a.priority - b.priority);
   }
 }
+
+const shortestPath = (start, end) => {
+  const distances = {};
+  const wg = new WeightedGraph();
+  for (let key in wg.adjacencyList) {
+    key === start
+      ? (distances[key] = 0)
+      : (distances[key] = Number.POSITIVE_INFINITY);
+  }
+};
